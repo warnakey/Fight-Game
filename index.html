@@ -1,125 +1,134 @@
 <!DOCTYPE html>
 <html>
-<body>
-<head>
-<style>
-#demo {
-	background: #eafeaf;
-    padding: 20px;
-    margin-bottom: 0;
-}
-#playerinfo, #enemyinfo {
-	float: left;
-    width: 50%;
-    background: #ddd;
-    height: 170px;
-    margin-bottom: 20px;
-}
-#playerinfo {
-	width: calc(50% - 3px);
-}
-#playerinfo {
-	border-right: 3px solid #fff;
-}
-#playerinfo p, #playerinfo h3, #enemyinfo p, #enemyinfo h3 {
-    padding: 0 20px;
-}
-#playerinfo h3, #enemyinfo h3 {
-	padding-top: 20px;
-}
-h3 {
-	margin: 0;
-}
-</style>
-</head>
+    <head>
+	<style>
+	#demo {
+	    background: #eafeaf;
+	    padding: 20px;
+	    margin-bottom: 0;
+	}
+	#playerinfo, #enemyinfo {
+	    float: left;
+	    width: 50%;
+	    background: #ddd;
+	    height: 170px;
+	    margin-bottom: 20px;
+	}
+	#playerinfo {
+	    width: calc(50% - 3px);
+	}
+	#playerinfo {
+	    border-right: 3px solid #fff;
+	}
+	#playerinfo p, #playerinfo h3, #enemyinfo p, #enemyinfo h3 {
+	    padding: 0 20px;
+	}
+	#playerinfo h3, #enemyinfo h3 {
+	    padding-top: 20px;
+	}
+	h3 {
+	    margin: 0;
+	}
+	</style>
+    </head>
+    <body>
+    <h1>Fight Game</h1>
+    <p>Press the buttons below to attack and defeat the monster.</p>
+    <button id="attackone" onclick="playerAttack()">Peck</button>
+    <button id="attacktwo" onclick="playerAttackTwo()">Flock</button>
 
-<h1>Fight Game</h1>
+    <p id="demo"></p>
 
-<p>Press the buttons below to attack and defeat the monster.</p>
+    <div id="playerboxes">
+        <div id="playerinfo"><p><strong>Player Info:</strong></p></div>
+        <div id="enemyinfo"><p><strong>Enemy Info:</strong></p></div>
+    </div>
 
-<button onclick="playerAttack()">Peck</button>
-<button onclick="playerAttackTwo()">Flock</button>
+    <script>
+	var playerName = "Carol Whopper";
+	var attackOneName = "Peck";
+	var attackTwoName = "Flock";
+	var enemyName = "Zombie";
+	var enemyAttackOne = "Scratch";
+	var playerHealth = 100;
+	var enemyHealth = 100;
+	var playerAttackOneLow = 14;
+	var playerAttackOneHigh = 30;
+	var playerAttackTwoLow = 25;
+	var playerAttackTwoHigh = 50;
+	var enemyAttackOneLow = 10;
+	var enemyAttackOneHigh = 40;
 
-<p id="demo"></p>
-<div id="playerboxes">
-<div id="playerinfo"><p><strong>Player Info:</strong></p></div>
-<div id="enemyinfo"><p><strong>Enemy Info:</strong></p></div>
-</div>
+	document.getElementById("demo").innerHTML = `<p>Greetings young warrior ` + playerName + 
+	`. A great evil has befallen our land as a mysterious ` + enemyName + 
+	` has appeared and begun to turn innocent citizens into his chaotic slaves of evil. We are all depending on you to destroy the zombie.</p>`;
 
-<script>
-var playerName = "Carol Whopper";
-var attackOneName = "Peck";
-var attackTwoName = "Flock";
-var enemyName = "Zombie";
-var enemyAttackOne = "Scratch";
-var playerHealth = 100;
-var enemyHealth = 100;
-var playerAttackOneLow = 14;
-var playerAttackOneHigh = 30;
-var playerAttackTwoLow = 25;
-var playerAttackTwoHigh = 50;
-var enemyAttackOneLow = 10;
-var enemyAttackOneHigh = 40;
+	document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
+	<p><strong>Name: </strong>` + playerName + `</p>
+	<p><strong>Health: </strong>` + playerHealth + `</p>`;
 
-document.getElementById("demo").innerHTML = "Greetings young warrior " + playerName + ". A great evil has befallen our land as a mysterious " + enemyName + " has appeared and begun to turn innocent citizens into his chaotic slaves of evil. We are all depending on you to destroy the zombie.";
+	document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
+	<p><strong>Name: </strong>` + enemyName + `</p>
+	<p><strong>Health: </strong>` + enemyHealth + `</p>`;
 
-document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
+	if (playerHealth > 0 && enemyHealth > 0) {
+		
+	    function playerAttack() {
+		var damageDealt = Math.floor(Math.random() * (playerAttackOneHigh - playerAttackOneLow + 1)) + playerAttackOneLow;
+		var enemyDamageDealt = Math.floor(Math.random() * (enemyAttackOneHigh - enemyAttackOneLow + 1)) + enemyAttackOneLow;
 
-<p><strong>Name: </strong>` + playerName + `</p>
-<p><strong>Health: </strong>` + playerHealth + `</p>`;
+		document.getElementById("demo").innerHTML = `<p><strong>GET PECKED!!</strong><p>
+	    	<p>You dealt ` + damageDealt + ` damage to the ` + enemyName + `!</p>
+	    	<p>However, the ` + enemyName + ` retaliates and slashes at you dealing ` + enemyDamageDealt + ` damage!</p>`;
 
-document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
+		var newHealth = playerHealth - enemyDamageDealt;
+		var newEnemyHealth = enemyHealth - damageDealt;
+		    
+		document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
+		<p><strong>Name: </strong>` + playerName + `</p>
+		<p><strong>Health: </strong>` + newHealth + `</p>`;
+		    
+		document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
+		<p><strong>Name: </strong>` + enemyName + `</p>
+		<p><strong>Health: </strong>` + newEnemyHealth + `</p>`;
+	    }
+		
+	    function playerAttackTwo() {
+		var damageDealt = Math.floor(Math.random() * (playerAttackTwoHigh - playerAttackTwoLow + 1)) + playerAttackTwoLow;
+		var enemyDamageDealt = Math.floor(Math.random() * (enemyAttackOneHigh - enemyAttackOneLow + 1)) + enemyAttackOneLow;
 
-<p><strong>Name: </strong>` + enemyName + `</p>
-<p><strong>Health: </strong>` + enemyHealth + `</p>`;
+	      	document.getElementById("demo").innerHTML = `<p><strong>FLOCK ATTACK! GO!!!!</strong><p>
+		<p>You dealt ` + damageDealt + ` damage to the ` + enemyName + 
+		`. However, the zombie retaliates and slashes at you dealing ` + enemyDamageDealt + ` damage!`;
 
-function playerAttack() {
-	document.getElementById("demo").innerHTML = "GET PECKED!!";
-    
-	var damageDealt = Math.floor(Math.random() * (playerAttackOneHigh - playerAttackOneLow + 1)) + playerAttackOneLow;
-    
-    var enemyDamageDealt = Math.floor(Math.random() * (enemyAttackOneHigh - enemyAttackOneLow + 1)) + enemyAttackOneLow;
-    
-    document.getElementById("demo").innerHTML = "GET PECKED!!\n\nYou dealt " + damageDealt + " damage to the Zombie! However, the zombie retaliates and slashes at you dealing " + enemyDamageDealt + " damage!";
-    
-    var playerHealth = playerHealth - enemyDamageDealt;
-    var enemyHealth = enemyHealth - damageDealt;
-    
-    document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
+		var newPlayerHealth = playerHealth - enemyDamageDealt;
 
-<p><strong>Name: </strong>` + playerName + `</p>
-<p><strong>Health: </strong>` + playerHealth + `</p>`;
+		var newEnemyHealth = enemyHealth - damageDealt;
+		document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
 
-  document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
+	<p><strong>Name: </strong>` + playerName + `</p>
+	<p><strong>Health: </strong>` + newPlayerHealth + `</p>`;
 
-  <p><strong>Name: </strong>` + enemyName + `</p>
-  <p><strong>Health: </strong>` + enemyHealth + `</p>`;
-}
-function playerAttackTwo() {
-	document.getElementById("demo").innerHTML = "FLOCK ATTACK! GO!!!!";
-    var damageDealt = Math.floor(Math.random() * (playerAttackTwoHigh - playerAttackTwoLow + 1)) + playerAttackTwoLow;
-    var enemyDamageDealt = Math.floor(Math.random() * (enemyAttackOneHigh - enemyAttackOneLow + 1)) + enemyAttackOneLow;
-    
-    document.getElementById("demo").innerHTML = "FLOCK ATTACK! GO!!!!\n\nYou dealt " + damageDealt + " damage to the Zombie! However, the zombie retaliates and slashes at you dealing " + enemyDamageDealt + " damage!";
-    
-    alert(playerHealth);
-    
-    var playerHealth = playerHealth - enemyDamageDealt;
-    
-    alert(playerHealth);
-    var enemyHealth = enemyHealth - damageDealt;
-    
-    document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
-
-<p><strong>Name: </strong>` + playerName + `</p>
-<p><strong>Health: </strong>` + playerHealth + `</p>`;
-
-  document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
-
-  <p><strong>Name: </strong>` + enemyName + `</p>
-  <p><strong>Health: </strong>` + enemyHealth + `</p>`;
-}	
-</script>
+	  document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
+	  <p><strong>Name: </strong>` + enemyName + `</p>
+	  <p><strong>Health: </strong>` + newEnemyHealth + `</p>`;
+	  }
+	} else if (playerHealth > 0 && enemyHealth <= 0) {
+		document.getElementById("attackone").disabled = true;
+		document.getElementById("attacktwo").disabled = true;
+		document.getElementById("demo").innerHTML = `<p><strong>CONGRATULATIONS!</strong></p>
+		<p>You defeated the ` + enemyName + `</p>`;
+	} else if (playerHealth <= 0 && enemyHealth > 0) {
+	document.getElementById("attackone").disabled = true;
+		document.getElementById("attacktwo").disabled = true;
+		document.getElementById("demo").innerHTML = `<p><strong>GAME OVER!</strong></p>
+	    <p>You have been defeated by the ` + enemyName + `. Will you try again?</p>`;
+	} else {
+	document.getElementById("attackone").disabled = true;
+		document.getElementById("attacktwo").disabled = true;
+		document.getElementById("demo").innerHTML = `<p><strong>GAME OVER!</strong></p>`;
+	}
+    </script>
 
 </body>
 </html>
