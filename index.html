@@ -3,9 +3,33 @@
 <body>
 <head>
 <style>
-#demo {background: #eafeaf; padding: 20px;}
-#playerinfo, #enemyinfo {float: left; width: 38%; background: #ddd; padding: 20px;}
-#playerinfo {margin-right: 20px;}
+#demo {
+	background: #eafeaf;
+    padding: 20px;
+    margin-bottom: 0;
+}
+#playerinfo, #enemyinfo {
+	float: left;
+    width: 50%;
+    background: #ddd;
+    height: 170px;
+    margin-bottom: 20px;
+}
+#playerinfo {
+	width: calc(50% - 3px);
+}
+#playerinfo {
+	border-right: 3px solid #fff;
+}
+#playerinfo p, #playerinfo h3, #enemyinfo p, #enemyinfo h3 {
+    padding: 0 20px;
+}
+#playerinfo h3, #enemyinfo h3 {
+	padding-top: 20px;
+}
+h3 {
+	margin: 0;
+}
 </style>
 </head>
 
@@ -17,8 +41,10 @@
 <button onclick="playerAttackTwo()">Flock</button>
 
 <p id="demo"></p>
-<p id="playerinfo"><strong>Player Info:</strong> </p>
-<p id="enemyinfo"><strong>Enemy Info:</strong> </p>
+<div id="playerboxes">
+<div id="playerinfo"><p><strong>Player Info:</strong></p></div>
+<div id="enemyinfo"><p><strong>Enemy Info:</strong></p></div>
+</div>
 
 <script>
 var playerName = "Carol Whopper";
@@ -37,15 +63,37 @@ var enemyAttackOneHigh = 40;
 
 document.getElementById("demo").innerHTML = "Greetings young warrior " + playerName + ". A great evil has befallen our land as a mysterious " + enemyName + " has appeared and begun to turn innocent citizens into his chaotic slaves of evil. We are all depending on you to destroy the zombie.";
 
-document.getElementById("playerinfo").innerHTML = "<strong>Player Info:</strong> /n <strong>Name:</strong>" + playerName;
+document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
+
+<p><strong>Name: </strong>` + playerName + `</p>
+<p><strong>Health: </strong>` + playerHealth + `</p>`;
+
+document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
+
+<p><strong>Name: </strong>` + enemyName + `</p>
+<p><strong>Health: </strong>` + enemyHealth + `</p>`;
 
 function playerAttack() {
 	document.getElementById("demo").innerHTML = "GET PECKED!!";
     
 	var damageDealt = Math.floor(Math.random() * (playerAttackOneHigh - playerAttackOneLow + 1)) + playerAttackOneLow;
+    
     var enemyDamageDealt = Math.floor(Math.random() * (enemyAttackOneHigh - enemyAttackOneLow + 1)) + enemyAttackOneLow;
     
     document.getElementById("demo").innerHTML = "GET PECKED!!\n\nYou dealt " + damageDealt + " damage to the Zombie! However, the zombie retaliates and slashes at you dealing " + enemyDamageDealt + " damage!";
+    
+    var playerHealth = playerHealth - enemyDamageDealt;
+    var enemyHealth = enemyHealth - damageDealt;
+    
+    document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
+
+<p><strong>Name: </strong>` + playerName + `</p>
+<p><strong>Health: </strong>` + playerHealth + `</p>`;
+
+  document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
+
+  <p><strong>Name: </strong>` + enemyName + `</p>
+  <p><strong>Health: </strong>` + enemyHealth + `</p>`;
 }
 function playerAttackTwo() {
 	document.getElementById("demo").innerHTML = "FLOCK ATTACK! GO!!!!";
@@ -53,7 +101,24 @@ function playerAttackTwo() {
     var enemyDamageDealt = Math.floor(Math.random() * (enemyAttackOneHigh - enemyAttackOneLow + 1)) + enemyAttackOneLow;
     
     document.getElementById("demo").innerHTML = "FLOCK ATTACK! GO!!!!\n\nYou dealt " + damageDealt + " damage to the Zombie! However, the zombie retaliates and slashes at you dealing " + enemyDamageDealt + " damage!";
-}  
+    
+    alert(playerHealth);
+    
+    var playerHealth = playerHealth - enemyDamageDealt;
+    
+    alert(playerHealth);
+    var enemyHealth = enemyHealth - damageDealt;
+    
+    document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
+
+<p><strong>Name: </strong>` + playerName + `</p>
+<p><strong>Health: </strong>` + playerHealth + `</p>`;
+
+  document.getElementById("enemyinfo").innerHTML = `<h3><strong>Enemy Info:</strong></h3>
+
+  <p><strong>Name: </strong>` + enemyName + `</p>
+  <p><strong>Health: </strong>` + enemyHealth + `</p>`;
+}	
 </script>
 
 </body>
