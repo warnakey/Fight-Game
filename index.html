@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+<style>
+#demo {background: #eafeaf; padding: 20px;}
+#playerinfo, #enemyinfo {float: left; width: 38%; background: #ddd; padding: 20px;}
+#playerinfo {margin-right: 20px;}
+</style>
+</head>
+
+<h1>Fight Game</h1>
+
+<p>Press the buttons below to attack and defeat the monster.</p>
+
+<button onclick="playerAttack()">Peck</button>
+<button onclick="playerAttackTwo()">Flock</button>
+
+<p id="demo"></p>
+<p id="playerinfo"><strong>Player Info:</strong> </p>
+<p id="enemyinfo"><strong>Enemy Info:</strong> </p>
+
+<script>
+var playerName = "Carol Whopper";
+var attackOneName = "Peck";
+var attackTwoName = "Flock";
+var enemyName = "Zombie";
+var enemyAttackOne = "Scratch";
+var playerHealth = 100;
+var enemyHealth = 100;
+var playerAttackOneLow = 14;
+var playerAttackOneHigh = 30;
+var playerAttackTwoLow = 25;
+var playerAttackTwoHigh = 50;
+var enemyAttackOneLow = 10;
+var enemyAttackOneHigh = 40;
+
+document.getElementById("demo").innerHTML = "Greetings young warrior " + playerName + ". A great evil has befallen our land as a mysterious " + enemyName + " has appeared and begun to turn innocent citizens into his chaotic slaves of evil. We are all depending on you to destroy the zombie.";
+
+document.getElementById("playerinfo").innerHTML = "<strong>Player Info:</strong> /n <strong>Name:</strong>" + playerName;
+
+function playerAttack() {
+	document.getElementById("demo").innerHTML = "GET PECKED!!";
+    
+	var damageDealt = Math.floor(Math.random() * (playerAttackOneHigh - playerAttackOneLow + 1)) + playerAttackOneLow;
+    var enemyDamageDealt = Math.floor(Math.random() * (enemyAttackOneHigh - enemyAttackOneLow + 1)) + enemyAttackOneLow;
+    
+    document.getElementById("demo").innerHTML = "GET PECKED!!\n\nYou dealt " + damageDealt + " damage to the Zombie! However, the zombie retaliates and slashes at you dealing " + enemyDamageDealt + " damage!";
+}
+function playerAttackTwo() {
+	document.getElementById("demo").innerHTML = "FLOCK ATTACK! GO!!!!";
+    var damageDealt = Math.floor(Math.random() * (playerAttackTwoHigh - playerAttackTwoLow + 1)) + playerAttackTwoLow;
+    var enemyDamageDealt = Math.floor(Math.random() * (enemyAttackOneHigh - enemyAttackOneLow + 1)) + enemyAttackOneLow;
+    
+    document.getElementById("demo").innerHTML = "FLOCK ATTACK! GO!!!!\n\nYou dealt " + damageDealt + " damage to the Zombie! However, the zombie retaliates and slashes at you dealing " + enemyDamageDealt + " damage!";
+}  
+</script>
+
+</body>
+</html>
