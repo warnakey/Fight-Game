@@ -34,8 +34,8 @@
     <body>
     <h1>Fight Game</h1>
     <p>Press the buttons below to attack and defeat the monster.</p>
-    <button id="attackone" onclick="playerAttack()">Peck</button>
-    <button id="attacktwo" onclick="playerAttackTwo()">Flock</button>
+    <button id="attackone" onclick="playerAttack()">Sword</button>
+    <button id="attacktwo" onclick="playerAttackTwo()">Magic</button>
 
     <p id="demo"></p>
 
@@ -45,23 +45,36 @@
     </div>
 
     <script>
-	var playerName = "Carol Whopper";
-	var attackOneName = "Peck";
-	var attackTwoName = "Flock";
-	var enemyName = "Zombie";
-	var enemyAttackOne = "Scratch";
+	var playerName = "Rumble Skirmish";
+	var attackOneName = "Sword";
+	var attackTwoName = "Magic";
+	var enemyName = "Ghost";
+	var enemyAttackOne = "Boo Attack";
 	var playerHealth = 100;
 	var enemyHealth = 100;
-	var playerAttackOneLow = 14;
-	var playerAttackOneHigh = 30;
-	var playerAttackTwoLow = 25;
-	var playerAttackTwoHigh = 50;
+	var playerAttackOneLow = 15;
+	var playerAttackOneHigh = 40;
+	var playerAttackTwoLow = 50;
+	var playerAttackTwoHigh = 75;
 	var enemyAttackOneLow = 10;
-	var enemyAttackOneHigh = 40;
+	var enemyAttackOneHigh = 30;
+  var helperName = "Chris";
+  var helperHealth = 1000000;
+  var helperAttackOneName = "Heal";
+  var helperAttackOneAmount = 100;
+  var helperAttackTwoName = "Teleportation";
+  
+  /* WORLD VARIABLES */
+  
+  var planetName = "Pixel World";
+  var ourCountry = "Mirage Country";
+  var ourCity = "Hometown";
+  var northCountry = "Chimpanese Land";
+  var southCountry = "Green Country";
 
 	document.getElementById("demo").innerHTML = `<p>Greetings young warrior ` + playerName + 
 	`. A great evil has befallen our land as a mysterious ` + enemyName + 
-	` has appeared and begun to turn innocent citizens into his chaotic slaves of evil. We are all depending on you to destroy the zombie.</p>`;
+	` has appeared and begun to turn innocent citizens into his chaotic slaves of evil. We are all depending on you to destroy the ` + enemyName + `.</p>`;
 
 	document.getElementById("playerinfo").innerHTML = `<h3><strong>Player Info:</strong></h3>
 	<p><strong>Name: </strong>` + playerName + `</p>
